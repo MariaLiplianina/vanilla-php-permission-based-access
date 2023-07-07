@@ -12,8 +12,8 @@ use App\Shared\UI\CLI\Output\OutputInterface;
 class CheckPermission implements CommandInterface
 {
     public function __construct(
-        private readonly PermissionService $permissionService)
-    {
+        private readonly PermissionService $permissionService
+    ) {
     }
 
     public function getName(): string

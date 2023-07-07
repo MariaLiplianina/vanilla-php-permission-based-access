@@ -10,7 +10,6 @@ use http\Exception\InvalidArgumentException;
 
 class ModulePermissionRepository
 {
-
     public function __construct(private readonly DatabaseInterface $database)
     {
     }

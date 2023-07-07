@@ -6,9 +6,7 @@ namespace App\Modules\Module\Domain\Entity;
 
 class Module
 {
-
     private string $id;
-
     private string $name;
 
     public static function createModule(

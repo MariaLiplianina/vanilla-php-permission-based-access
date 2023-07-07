@@ -6,7 +6,6 @@ namespace App\Modules\Module\Domain\Entity;
 
 class ModuleFunction
 {
-
     private string $id;
 
     private string $name;

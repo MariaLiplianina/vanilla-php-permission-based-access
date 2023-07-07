@@ -9,7 +9,6 @@ use App\Shared\Infrastructure\DatabaseInterface;
 
 class ModuleRepository
 {
-
     public function __construct(private readonly DatabaseInterface $database)
     {
     }
