@@ -1,0 +1,38 @@
+version: '3.8'
+
+x-environment: &environment
+    MYSQL_ROOT_PASSWORD: mysql_root_password
+    MYSQL_DATABASE: app_db
+    MYSQL_USER: app_user
+    MYSQL_PASSWORD: app_password
+
+services:
+  app_php:
+    restart: always
+    environment:
+      <<: *environment
+      PHP_IDE_CONFIG: "serverName=docker"
+    build:
+      context: bin/test-task
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - ./:/app
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    ports:
+      - "3160:3160"
+    depends_on:
+      - app_mysql
+
+  app_mysql:
+    restart: always
+    platform: linux/amd64
+    environment:
+      <<: *environment
+    build:
+      context: bin/test-task
+      dockerfile: docker/mysql/Dockerfile
+    volumes:
+      - ./:/.mysqldata:/bitnami/mysql/data
+      - ./:/docker/mysql/conf/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf
+    ports:
+      - "9306:3306"

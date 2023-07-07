@@ -1,0 +1,81 @@
+#!/usr/bin/env php
+<?php
+
+use App\Modules\Module\Infrastructure\Repository\ModuleFunctionRepository;
+use App\Modules\Module\Infrastructure\Repository\ModuleRepository;
+use App\Modules\Module\UI\CLI\CreateModule;
+use App\Modules\Module\UI\CLI\CreateModuleFunction;
+use App\Modules\Permission\Application\PermissionService;
+use App\Modules\Permission\Infrastructure\Repository\ModulePermissionRepository;
+use App\Modules\Permission\Infrastructure\Repository\PermissionRepository;
+use App\Modules\Permission\Infrastructure\Repository\UserPermissionRepository;
+use App\Modules\Permission\UI\CLI\AssignModulePermissionToUser;
+use App\Modules\Permission\UI\CLI\CheckPermission;
+use App\Modules\Permission\UI\CLI\ConnectPermissionWithModule;
+use App\Modules\Permission\UI\CLI\CreatePermission;
+use App\Modules\User\Infrastructure\Repository\GroupRepository;
+use App\Modules\User\Infrastructure\Repository\UserRepository;
+use App\Modules\User\UI\Cli\CreateGroup;
+use App\Modules\User\UI\Cli\RegisterUser;
+use App\Shared\Infrastructure\DB\Mysql\MysqlDatabase;
+use App\Shared\UI\CLI\Application;
+
+require_once dirname(__DIR__).'/autoloader.php';
+
+if (php_sapi_name() !== 'cli') {
+    exit;
+}
+
+$application = new Application($argv);
+$db = new MysqlDatabase();
+
+$groupRepository = new GroupRepository($db);
+$userRepository = new UserRepository($db);
+$moduleRepository = new ModuleRepository($db);
+$moduleFunctionRepository = new ModuleFunctionRepository($db);
+$permissionRepository = new PermissionRepository($db);
+$userPermissionRepository = new UserPermissionRepository($db);
+$modulePermissionRepository = new ModulePermissionRepository($db);
+$checkPermissionAccessService = new PermissionService($userPermissionRepository);
+
+$application->registerCommand(new CreateGroup(
+    $groupRepository,
+));
+
+$application->registerCommand(new RegisterUser(
+    $groupRepository,
+    $userRepository,
+));
+
+$application->registerCommand(new CreateModule(
+    $moduleRepository,
+));
+
+$application->registerCommand(new CreateModuleFunction(
+    $moduleRepository,
+    $moduleFunctionRepository,
+));
+
+$application->registerCommand(new CreatePermission(
+    $permissionRepository
+));
+
+$application->registerCommand(new AssignModulePermissionToUser(
+    $groupRepository,
+    $userRepository,
+    $modulePermissionRepository,
+    $userPermissionRepository,
+));
+
+$application->registerCommand(new ConnectPermissionWithModule(
+    $moduleRepository,
+    $moduleFunctionRepository,
+    $permissionRepository,
+    $modulePermissionRepository,
+));
+
+$application->registerCommand(new CheckPermission(
+    $checkPermissionAccessService,
+));
+
+$application->run();
