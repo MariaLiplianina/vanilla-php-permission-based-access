@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Permission\UI\CLI;
 
 use App\Modules\Permission\Domain\Entity\Permission;
-use App\Modules\Permission\Infrastructure\Repository\PermissionRepository;
+use App\Modules\Permission\Domain\Repository\PermissionRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -19,7 +19,7 @@ class CreatePermission implements CommandInterface
        return 'permission:create-permission';
     }
 
-    public function __construct(private readonly PermissionRepository $permissionRepository)
+    public function __construct(private readonly PermissionRepositoryInterface $permissionRepository)
     {
     }
 

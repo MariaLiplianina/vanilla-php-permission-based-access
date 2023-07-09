@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\User\UI\Cli;
 
 use App\Modules\User\Domain\Entity\Group;
-use App\Modules\User\Infrastructure\Repository\GroupRepository;
+use App\Modules\User\Domain\Repository\GroupRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -19,7 +19,7 @@ class CreateGroup implements CommandInterface
        return 'user:create-group';
     }
 
-    public function __construct(private readonly GroupRepository $groupRepository)
+    public function __construct(private readonly GroupRepositoryInterface $groupRepository)
     {
     }
 

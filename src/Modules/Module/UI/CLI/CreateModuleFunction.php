@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Modules\Module\UI\CLI;
 
 use App\Modules\Module\Domain\Entity\ModuleFunction;
-use App\Modules\Module\Infrastructure\Repository\ModuleFunctionRepository;
-use App\Modules\Module\Infrastructure\Repository\ModuleRepository;
+use App\Modules\Module\Domain\Repository\ModuleFunctionRepositoryInterface;
+use App\Modules\Module\Domain\Repository\ModuleRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -15,8 +15,8 @@ use App\Shared\UI\CLI\Output\OutputInterface;
 class CreateModuleFunction implements CommandInterface
 {
     public function __construct(
-        private readonly ModuleRepository $moduleRepository,
-        private readonly ModuleFunctionRepository $moduleFunctionRepository,
+        private readonly ModuleRepositoryInterface $moduleRepository,
+        private readonly ModuleFunctionRepositoryInterface $moduleFunctionRepository,
     ) {
     }
 

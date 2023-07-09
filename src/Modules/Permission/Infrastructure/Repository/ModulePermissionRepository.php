@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Modules\Permission\Infrastructure\Repository;
 
 use App\Modules\Permission\Domain\Entity\ModulePermission;
+use App\Modules\Permission\Domain\Repository\ModulePermissionRepositoryInterface;
 use App\Shared\Infrastructure\DatabaseInterface;
 use http\Exception\InvalidArgumentException;
 
-class ModulePermissionRepository
+class ModulePermissionRepository implements ModulePermissionRepositoryInterface
 {
     public function __construct(private readonly DatabaseInterface $database)
     {

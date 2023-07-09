@@ -1,8 +1,12 @@
+### Architecture
+
+This repository implements Clean architecture (Core, Application, Infrastructure and Presentation Layers) and Domain Driven Design (Entities, Repositories, Application Services...) with applying SOLID principles.
+
 ### Installation
 
 The project is dockerized and configured to work with docker-compose
 - to run the container, use `docker compose up -d`
-- use `docker compose exec -T app_mysql mysql -u root --password=mysql_root_password app_db < migrations/up/000000001.sql` to set up database
+- use `docker compose exec -T app_mysql mysql -u root --password=mysql_root_password app_db < src/Shared/Infrastucture/DB/Mysql/Migrations/up/000000001.sql` to set up database
 
 ### Commands
 - add Group 

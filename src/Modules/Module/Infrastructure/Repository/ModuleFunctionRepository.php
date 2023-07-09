@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Modules\Module\Infrastructure\Repository;
 
 use App\Modules\Module\Domain\Entity\ModuleFunction;
+use App\Modules\Module\Domain\Repository\ModuleFunctionRepositoryInterface;
 use App\Shared\Infrastructure\DatabaseInterface;
 
-class ModuleFunctionRepository
+class ModuleFunctionRepository implements ModuleFunctionRepositoryInterface
 {
     public function __construct(private readonly DatabaseInterface $database)
     {

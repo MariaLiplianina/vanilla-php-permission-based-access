@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Permission\UI\CLI;
 
-use App\Modules\Module\Infrastructure\Repository\ModuleFunctionRepository;
-use App\Modules\Module\Infrastructure\Repository\ModuleRepository;
+use App\Modules\Module\Domain\Repository\ModuleFunctionRepositoryInterface;
+use App\Modules\Module\Domain\Repository\ModuleRepositoryInterface;
 use App\Modules\Permission\Domain\Entity\ModulePermission;
-use App\Modules\Permission\Infrastructure\Repository\ModulePermissionRepository;
-use App\Modules\Permission\Infrastructure\Repository\PermissionRepository;
+use App\Modules\Permission\Domain\Repository\ModulePermissionRepositoryInterface;
+use App\Modules\Permission\Domain\Repository\PermissionRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -17,10 +17,10 @@ use App\Shared\UI\CLI\Output\OutputInterface;
 class ConnectPermissionWithModule implements CommandInterface
 {
     public function __construct(
-        private readonly ModuleRepository         $moduleRepository,
-        private readonly ModuleFunctionRepository $moduleFunctionRepository,
-        private readonly PermissionRepository     $permissionRepository,
-        private readonly ModulePermissionRepository $modulePermissionRepository,
+        private readonly ModuleRepositoryInterface         $moduleRepository,
+        private readonly ModuleFunctionRepositoryInterface $moduleFunctionRepository,
+        private readonly PermissionRepositoryInterface     $permissionRepository,
+        private readonly ModulePermissionRepositoryInterface $modulePermissionRepository,
     ) {
     }
 

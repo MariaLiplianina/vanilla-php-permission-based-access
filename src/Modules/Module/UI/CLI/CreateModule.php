@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Module\UI\CLI;
 
 use App\Modules\Module\Domain\Entity\Module;
-use App\Modules\Module\Infrastructure\Repository\ModuleRepository;
+use App\Modules\Module\Domain\Repository\ModuleRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -19,7 +19,7 @@ class CreateModule implements CommandInterface
        return 'module:create-module';
     }
 
-    public function __construct(private readonly ModuleRepository $moduleRepository)
+    public function __construct(private readonly ModuleRepositoryInterface $moduleRepository)
     {
     }
 

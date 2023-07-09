@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Modules\Permission\Infrastructure\Repository;
 
 use App\Modules\Permission\Domain\Entity\UserPermission;
+use App\Modules\Permission\Domain\Repository\UserPermissionRepositoryInterface;
 use App\Shared\Infrastructure\DatabaseInterface;
 
-class UserPermissionRepository
+class UserPermissionRepository implements UserPermissionRepositoryInterface
 {
 
     public function __construct(private readonly DatabaseInterface $database)
@@ -28,7 +29,7 @@ class UserPermissionRepository
         ]);
     }
 
-    public function getByUserAndFunction(string $username, string $moduleFunctionName): array
+    public function getByUserAndFunction(string $username, string $moduleFunctionName): ?UserPermission
     {
         $sql = "SELECT up.* 
                 FROM `user` u 
@@ -48,9 +49,9 @@ class UserPermissionRepository
                   AND (mf.name = :mf_name OR mf2.name = :mf_name)
         ;";
 
-        return $this->database->getSingleArrayResult($sql, [
+        return $this->database->getObjectOne($sql, UserPermission::class, [
             ':u_name' => $username,
             ':mf_name' => $moduleFunctionName,
-        ]);
+        ]) ?: null;
     }
 }

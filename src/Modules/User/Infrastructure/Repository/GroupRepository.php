@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Modules\User\Infrastructure\Repository;
 
 use App\Modules\User\Domain\Entity\Group;
+use App\Modules\User\Domain\Repository\GroupRepositoryInterface;
 use App\Shared\Infrastructure\DatabaseInterface;
 
-class GroupRepository
+class GroupRepository implements GroupRepositoryInterface
 {
 
     public function __construct(private readonly DatabaseInterface $database)

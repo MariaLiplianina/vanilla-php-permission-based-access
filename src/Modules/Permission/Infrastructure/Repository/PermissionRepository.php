@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Modules\Permission\Infrastructure\Repository;
 
 use App\Modules\Permission\Domain\Entity\Permission;
+use App\Modules\Permission\Domain\Repository\PermissionRepositoryInterface;
 use App\Shared\Infrastructure\DatabaseInterface;
 
-class PermissionRepository
+class PermissionRepository implements PermissionRepositoryInterface
 {
 
     public function __construct(private readonly DatabaseInterface $database)

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Modules\User\UI\Cli;
 
 use App\Modules\User\Domain\Entity\User;
-use App\Modules\User\Infrastructure\Repository\GroupRepository;
-use App\Modules\User\Infrastructure\Repository\UserRepository;
+use App\Modules\User\Domain\Repository\GroupRepositoryInterface;
+use App\Modules\User\Domain\Repository\UserRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -15,8 +15,8 @@ use App\Shared\UI\CLI\Output\OutputInterface;
 class RegisterUser implements CommandInterface
 {
     public function __construct(
-        private readonly GroupRepository $groupRepository,
-        private readonly UserRepository $userRepository,
+        private readonly GroupRepositoryInterface $groupRepository,
+        private readonly UserRepositoryInterface $userRepository,
     ) {
     }
 

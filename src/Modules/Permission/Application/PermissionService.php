@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Permission\Application;
 
-use App\Modules\Permission\Infrastructure\Repository\UserPermissionRepository;
+use App\Modules\Permission\Domain\Repository\UserPermissionRepositoryInterface;
 
 class PermissionService
 {
-    public function __construct(private readonly UserPermissionRepository $userPermissionRepository)
+    public function __construct(private readonly UserPermissionRepositoryInterface $userPermissionRepository)
     {
     }
 

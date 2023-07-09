@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Modules\Permission\UI\CLI;
 
 use App\Modules\Permission\Domain\Entity\UserPermission;
-use App\Modules\Permission\Infrastructure\Repository\ModulePermissionRepository;
-use App\Modules\Permission\Infrastructure\Repository\UserPermissionRepository;
-use App\Modules\User\Infrastructure\Repository\GroupRepository;
-use App\Modules\User\Infrastructure\Repository\UserRepository;
+use App\Modules\Permission\Domain\Repository\ModulePermissionRepositoryInterface;
+use App\Modules\Permission\Domain\Repository\UserPermissionRepositoryInterface;
+use App\Modules\User\Domain\Repository\GroupRepositoryInterface;
+use App\Modules\User\Domain\Repository\UserRepositoryInterface;
 use App\Shared\Helper\Uuid;
 use App\Shared\UI\CLI\CommandInterface;
 use App\Shared\UI\CLI\Input\InputInterface;
@@ -17,10 +17,10 @@ use App\Shared\UI\CLI\Output\OutputInterface;
 class AssignModulePermissionToUser implements CommandInterface
 {
     public function __construct(
-        private readonly GroupRepository          $groupRepository,
-        private readonly UserRepository           $userRepository,
-        private readonly ModulePermissionRepository     $modulePermissionRepository,
-        private readonly UserPermissionRepository $userPermissionRepository,
+        private readonly GroupRepositoryInterface          $groupRepository,
+        private readonly UserRepositoryInterface           $userRepository,
+        private readonly ModulePermissionRepositoryInterface     $modulePermissionRepository,
+        private readonly UserPermissionRepositoryInterface $userPermissionRepository,
     ) {
     }
 
